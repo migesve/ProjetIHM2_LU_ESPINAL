@@ -16,7 +16,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
         <html lang="fr">
             <body>
                 <Navbar />
-                <main>{children}</main>
+                <main style={{ marginTop: '60px' }}>{children}</main> {/* Adjust the margin as needed */}
             </body>
         </html>
     );
