@@ -1,6 +1,6 @@
 import './globals.css';
 import Navbar from '../components/Navbar';
-import { ReactNode } from 'react'; // Import ReactNode for type definition
+import { ReactNode } from 'react';
 
 export const metadata = {
     title: 'Championship Manager',
@@ -8,7 +8,7 @@ export const metadata = {
 };
 
 type RootLayoutProps = {
-    children: ReactNode; // Define the type of the children prop
+    children: ReactNode; 
 };
 
 export default function RootLayout({ children }: RootLayoutProps) {
@@ -16,7 +16,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
         <html lang="fr">
             <body>
                 <Navbar />
-                <main style={{ marginTop: '60px' }}>{children}</main> {/* Adjust the margin as needed */}
+                <main style={{ marginTop: '60px' }}>{children}</main> 
             </body>
         </html>
     );

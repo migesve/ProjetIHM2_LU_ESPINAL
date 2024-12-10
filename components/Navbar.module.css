@@ -31,3 +31,68 @@
     background-color: #ddd;
     color: black;
 }
+
+.subMenu {
+    display: none;
+    position: absolute;
+    background-color: white;
+    
+}
+
+.dropdown:hover .subMenu {
+    display: block;
+}
+
+.navbar {
+    background-color: #333;
+    padding: 1rem;
+}
+
+.navList {
+    list-style-type: none;
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
+    margin: 0;
+    padding: 0;
+}
+
+.navItem {
+    color: white;
+    cursor: pointer;
+    position: relative;
+}
+
+.dropdown {
+    position: relative;
+}
+
+.subMenu {
+    display: none; /* Hidden by default */
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background-color: #444;
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    width: 200px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.subMenuVisible {
+    display: block; /* Show when visible */
+}
+
+.subMenu li {
+    padding: 0.5rem 1rem;
+}
+
+.subMenu li a {
+    color: white;
+    text-decoration: none;
+}
+
+.subMenu li:hover {
+    background-color: #555;
+}

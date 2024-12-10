@@ -141,3 +141,46 @@ input {
     color: var(--text-color);
     text-align: center;
 }
+
+/* Navigation styles */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    background-color: var(--background-color);
+    padding: 10px 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.navbar a {
+    color: var(--text-color);
+    text-decoration: none;
+    padding: 10px 15px;
+    transition: background-color 0.3s;
+}
+
+.navbar a:hover {
+    background-color: var(--button-background);
+    color: var(--button-text);
+}
+
+.navbar .submenu {
+    position: relative;
+    display: inline-block;
+}
+
+.navbar .submenu-content {
+    display: none;
+    position: absolute;
+    background-color: var(--background-color);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    z-index: 1;
+}
+
+.navbar .submenu-content a {
+    display: block;
+    padding: 10px 15px;
+}
+
+.navbar .submenu:hover .submenu-content {
+    display: block;
+}
