@@ -1,6 +1,9 @@
 .navbar {
-  background-color: #333;
+  display: flex;
+  justify-content: space-between; /* Align left and right sections */
+  align-items: center;
   padding: 1rem;
+  background-color: #333;
 }
 
 .navList {
@@ -50,4 +53,20 @@
 
 .subMenu li:hover {
   background-color: #555;
+}
+
+/* New Styles for Left and Right Sections */
+.navLeft {
+  display: flex;
+}
+
+.navRight {
+  display: flex;
+  align-items: center;
+  color: white;
+  font-size: 1rem;
+}
+
+.userGreeting {
+  margin-left: 1rem;
 }

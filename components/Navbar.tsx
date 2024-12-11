@@ -11,15 +11,15 @@ export default function Navbar() {
 
   const [user, setUser] = useState<User | null>(null);
   const [role, setRole] = useState<string | null>(null);
-  const [isDropdownOpen, setIsDropdownOpen] = useState(false); // Dropdown state
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
   useEffect(() => {
-    setUser({ username: "JohnDoe" }); // Simulate user data
+    setUser({ username: "Pierre" }); 
   }, []);
 
   useEffect(() => {
     if (user) {
-      setRole("coach"); // Assign role based on user
+      setRole(null); 
     }
   }, [user]);
 
@@ -29,61 +29,59 @@ export default function Navbar() {
 
   return (
     <nav className={styles.navbar}>
-      <ul className={styles.navList}>
-        <li className={styles.navItem}>
-          <Link href="/">Accueil</Link>
-        </li>
-        <li
-          className={`${styles.navItem} ${styles.dropdown}`}
-          onClick={toggleDropdown}
-        >
-          <span>Championnats</span>
-          <ul
-            className={`${styles.subMenu} ${
-              isDropdownOpen ? styles.subMenuVisible : ""
-            }`}
-          >
-            <li className={styles.navItem}>
-              <Link href="/pages/calendrier">Calendrier</Link>
-            </li>
-            <li className={styles.navItem}>
-              <Link href="/pages/results">Résultats</Link>
-            </li>
-            <li className={styles.navItem}>
-              <Link href="/pages/classement">Classement</Link>
-            </li>
-          </ul>
-        </li>
-        {user ? (
-          <>
-            <li className={styles.navItem}>Bonjour, {user.username}</li>
-            {role === "coach" && (
-              <>
-                <li className={styles.navItem}>
-                  <Link href="/pages/organizer">Plateaux</Link>
-                </li>
-              </>
-            )}
-            {role === "responsable comite" && (
-              <>
-                <li className={styles.navItem}>
-                  <Link href="/pages/organizer">Plateaux</Link>
-                </li>
-                <li className={styles.navItem}>
-                  <Link href="/pages/championnats">Créer Championnat</Link>
-                </li>
-                <li className={styles.navItem}>
-                  <Link href="/pages/cloture">Clôture des Championnats</Link>
-                </li>
-              </>
-            )}
-          </>
-        ) : (
+      <div className={styles.navLeft}>
+        <ul className={styles.navList}>
           <li className={styles.navItem}>
-            <Link href="/pages/signup">Inscription / Connexion</Link>
+            <Link href="/">Accueil</Link>
           </li>
+          <li
+            className={`${styles.navItem} ${styles.dropdown}`}
+            onClick={toggleDropdown}
+          >
+            <span>Championnats</span>
+            <ul
+              className={`${styles.subMenu} ${
+                isDropdownOpen ? styles.subMenuVisible : ""
+              }`}
+            >
+              <li className={styles.navItem}>
+                <Link href="/pages/calendrier">Calendrier</Link>
+              </li>
+              <li className={styles.navItem}>
+                <Link href="/pages/results">Résultats</Link>
+              </li>
+              <li className={styles.navItem}>
+                <Link href="/pages/classement">Classement</Link>
+              </li>
+            </ul>
+          </li>
+          {role === "responsable comite" && (
+            <>
+              <li className={styles.navItem}>
+                <Link href="/pages/organizer">Plateaux</Link>
+              </li>
+              <li className={styles.navItem}>
+                <Link href="/pages/championnats">Créer Championnat</Link>
+              </li>
+              <li className={styles.navItem}>
+                <Link href="/pages/cloture">Clôture des Championnats</Link>
+              </li>
+            </>
+          )}
+          {role === "coach" && (
+            <li className={styles.navItem}>
+              <Link href="/pages/organizer">Plateaux</Link>
+            </li>
+          )}
+        </ul>
+      </div>
+      <div className={styles.navRight}>
+        {user ? (
+          <span className={styles.userGreeting}>Bonjour, {user.username}</span>
+        ) : (
+          <Link href="/pages/signup">Inscription / Connexion</Link>
         )}
-      </ul>
+      </div>
     </nav>
   );
 }

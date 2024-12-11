@@ -1,4 +1,4 @@
-"use client"; // Use the client-side version of React
+"use client"; 
 
 import React, { useState } from 'react';
 
@@ -12,7 +12,7 @@ const CreateChampionshipPage: React.FC = () => {
 
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
-        // Handle form submission logic here
+        
         console.log({ name, teams, gender, age, modality, level });
     };
 
