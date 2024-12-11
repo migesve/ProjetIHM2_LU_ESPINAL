@@ -13,6 +13,16 @@ interface Result {
   score: string;
 }
 
+const categories = ["M11", "M13", "M15", "M18"];
+const genres = ["Masculin", "Féminin"];
+const modalites = [
+  { label: "1v1", applicableTo: ["M11"] },
+  { label: "2v2", applicableTo: ["M11"] },
+  { label: "3v3", applicableTo: ["M11", "M13"] },
+  { label: "4v4", applicableTo: ["M13", "M15", "M18"] },
+  { label: "6v6", applicableTo: ["M15", "M18"] },
+];
+
 const results: Result[] = [
   {
     id: 1,
@@ -40,9 +50,16 @@ const RésultatsPage: React.FC = () => {
   const [week, setWeek] = useState<number>(0);
   const [category, setCategory] = useState<string>("");
   const [genre, setGenre] = useState<string>("");
+  const [modalite, setModalite] = useState<string>("");
+  const [selectedWeek, setSelectedWeek] = useState<string>("");
+
+  const filteredModalites = modalites.filter((modalite) =>
+    modalite.applicableTo.includes(category)
+  );
 
   const handleWeekChange = (direction: number): void => {
     setWeek(week + direction);
+    setSelectedWeek("");
   };
 
   const filteredResults = results.filter((result) => {
@@ -57,45 +74,86 @@ const RésultatsPage: React.FC = () => {
       <h1 className="title">Résultats des Matchs</h1>
       <div className="controls">
       <button onClick={() => handleWeekChange(-1)}>Previous Week</button>
+      <select
+        value={selectedWeek}
+        onChange={(e) => {
+        setSelectedWeek(e.target.value);
+        setWeek(Number(e.target.value));
+        }}
+      >
+        <option value="">Choose Week</option>
+        {[...Array(10)].map((_, index) => (
+        <option key={index} value={index}>
+          Week {index}
+        </option>
+        ))}
+      </select>
       <button onClick={() => handleWeekChange(1)}>Next Week</button>
       </div>
       <div className="filters">
       <label>
-        Category:
-        <select value={category} onChange={(e) => setCategory(e.target.value)}>
+        Catégorie d&apos;âge:
+        <select
+        value={category}
+        onChange={(e) => setCategory(e.target.value)}
+        >
         <option value="">All</option>
-        <option value="M11">M11</option>
-        <option value="M13">M13</option>
+        {categories.map((cat) => (
+          <option key={cat} value={cat}>
+          {cat}
+          </option>
+        ))}
         </select>
       </label>
       <label>
         Genre:
         <select value={genre} onChange={(e) => setGenre(e.target.value)}>
         <option value="">All</option>
-        <option value="Masculin">Masculin</option>
-        <option value="Féminin">Féminin</option>
+        {genres.map((gen) => (
+          <option key={gen} value={gen}>
+          {gen}
+          </option>
+        ))}
+        </select>
+      </label>
+      <label>
+        Modalité:
+        <select
+        value={modalite}
+        onChange={(e) => setModalite(e.target.value)}
+        >
+        <option value="">All</option>
+        {filteredModalites.map((mod) => (
+          <option key={mod.label} value={mod.label}>
+          {mod.label}
+          </option>
+        ))}
         </select>
       </label>
       </div>
       <div className="list">
-      {filteredResults.map((result) => (
+      {filteredResults.length > 0 ? (
+        filteredResults.map((result) => (
         <div className="card" key={result.id}>
-        <h2>{result.match}</h2>
-        <p>
+          <h2>{result.match}</h2>
+          <p>
           <strong>Date:</strong> {result.date}
-        </p>
-        <p>
+          </p>
+          <p>
           <strong>Time:</strong> {result.time}
-        </p>
-        <p>
+          </p>
+          <p>
           <strong>Location:</strong> {result.location}
-        </p>
-        <p>
+          </p>
+          <p>
           <strong>Score:</strong> {result.teamA} {result.score}{" "}
           {result.teamB}
-        </p>
+          </p>
         </div>
-      ))}
+        ))
+      ) : (
+        <p>No results found for this week or filters.</p>
+      )}
       </div>
     </div>
   );
