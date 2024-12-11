@@ -35,11 +35,11 @@ const events: Event[] = [
 ];
 
 const CalendrierPage: React.FC = () => {
-  const [week, setWeek] = useState(0);
-  const [category, setCategory] = useState("");
-  const [team, setTeam] = useState("");
+  const [week, setWeek] = useState<number>(0);
+  const [category, setCategory] = useState<string>("");
+  const [team, setTeam] = useState<string>("");
 
-  const handleWeekChange = (direction: number) => {
+  const handleWeekChange = (direction: number): void => {
     setWeek(week + direction);
   };
 
@@ -51,57 +51,57 @@ const CalendrierPage: React.FC = () => {
   });
 
   return (
-    <div className="calendrier-container">
-      <h1 className="calendrier-title">Calendrier des Matchs et Tournois</h1>
-      <div className="calendrier-controls">
-        <button onClick={() => handleWeekChange(-1)}>Previous Week</button>
-        <span>Week {week}</span>
-        <button onClick={() => handleWeekChange(1)}>Next Week</button>
+    <div className="container">
+      <h1 className="title">Calendrier des Matchs et Tournois</h1>
+      <div className="controls">
+      <button onClick={() => handleWeekChange(-1)}>Previous Week</button>
+      <span>Week {week}</span>
+      <button onClick={() => handleWeekChange(1)}>Next Week</button>
       </div>
-      <div className="calendrier-filters">
-        <label>
-          Filter by Category:
-          <select
-            value={category}
-            onChange={(e) => setCategory(e.target.value)}
-          >
-            <option value="">All</option>
-            <option value="Football">Football</option>
-            <option value="Basketball">Basketball</option>
-          </select>
-        </label>
-        <label>
-          Filter by Team:
-          <input
-            type="text"
-            value={team}
-            onChange={(e) => setTeam(e.target.value)}
-            placeholder="Enter team name"
-          />
-        </label>
+      <div className="filters">
+      <label>
+        Filter by Category:
+        <select
+        value={category}
+        onChange={(e) => setCategory(e.target.value)}
+        >
+        <option value="">All</option>
+        <option value="Football">Football</option>
+        <option value="Basketball">Basketball</option>
+        </select>
+      </label>
+      <label>
+        Filter by Team:
+        <input
+        type="text"
+        value={team}
+        onChange={(e) => setTeam(e.target.value)}
+        placeholder="Enter team name"
+        />
+      </label>
       </div>
-      <div className="calendrier-event-list">
-        {filteredEvents.map((event) => (
-          <div className="calendrier-event-card" key={event.id}>
-            <h2>{event.name}</h2>
-            <p>
-              <span>Location:</span> {event.location}
-            </p>
-            <p>
-              <span>Date:</span> {event.date}
-            </p>
-            <p>
-              <span>Time:</span> {event.time}
-            </p>
-            <p>
-              <span>Organizer:</span> {event.organizer.name}
-            </p>
-            <p>
-              <span>Contact:</span> {event.organizer.phone},{" "}
-              {event.organizer.email}
-            </p>
-          </div>
-        ))}
+      <div className="list">
+      {filteredEvents.map((event) => (
+        <div className="card" key={event.id}>
+        <h2>{event.name}</h2>
+        <p>
+          <strong>Location:</strong> {event.location}
+        </p>
+        <p>
+          <strong>Date:</strong> {event.date}
+        </p>
+        <p>
+          <strong>Time:</strong> {event.time}
+        </p>
+        <p>
+          <strong>Organizer:</strong> {event.organizer.name}
+        </p>
+        <p>
+          <strong>Contact:</strong> {event.organizer.phone},{" "}
+          {event.organizer.email}
+        </p>
+        </div>
+      ))}
       </div>
     </div>
   );

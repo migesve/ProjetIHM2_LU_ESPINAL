@@ -1,6 +1,6 @@
 .navbar {
   display: flex;
-  justify-content: space-between; /* Align left and right sections */
+  justify-content: space-between;
   align-items: center;
   padding: 1rem;
   background-color: #333;
@@ -26,7 +26,7 @@
 }
 
 .subMenu {
-  display: none; /* Hidden by default */
+  display: none;
   position: absolute;
   top: 100%;
   left: 0;
@@ -36,10 +36,15 @@
   padding: 0;
   width: 200px;
   box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
 }
 
 .subMenuVisible {
-  display: block; /* Show when visible */
+  display: block;
+}
+
+.dropdown:hover .subMenu {
+  display: block;
 }
 
 .subMenu li {
