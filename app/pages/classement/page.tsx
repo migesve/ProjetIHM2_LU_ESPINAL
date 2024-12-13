@@ -12,8 +12,8 @@ interface Team {
 const categories = ["M11", "M13", "M15", "M18"];
 const genres = ["Masculin", "Féminin"];
 const modalites = [
-    { label: "1v1", applicableTo: ["M11"] },
-    { label: "2v2", applicableTo: ["M11"] },
+  { label: "1v1", applicableTo: ["M11"] },
+  { label: "2v2", applicableTo: ["M11"] },
   { label: "3v3", applicableTo: ["M11", "M13"] },
   { label: "4v4", applicableTo: ["M13", "M15", "M18"] },
   { label: "6v6", applicableTo: ["M15", "M18"] },
@@ -41,73 +41,93 @@ const ChampionnatsPage: React.FC = () => {
   );
 
   return (
-    <div className="championnats-container">
-      <h1 className="championnats-title">Championnat</h1>
-      <div className="championnats-filters">
-        <label>
-          Catégorie d&apos;âge:
-          <select
-            value={selectedCategory}
-            onChange={(e) => setSelectedCategory(e.target.value)}
-          >
-            <option value="">Select</option>
-            {categories.map((category) => (
-              <option key={category} value={category}>
-                {category}
-              </option>
-            ))}
-          </select>
-        </label>
-        <label>
-          Genre:
-          <select
-            value={selectedGenre}
-            onChange={(e) => setSelectedGenre(e.target.value)}
-          >
-            <option value="">Select</option>
-            {genres.map((genre) => (
-              <option key={genre} value={genre}>
-                {genre}
-              </option>
-            ))}
-          </select>
-        </label>
-        <label>
-          Modalité:
-          <select
-            value={selectedModalite}
-            onChange={(e) => setSelectedModalite(e.target.value)}
-          >
-            <option value="">Select</option>
-            {filteredModalites.map((modalite) => (
-              <option key={modalite.label} value={modalite.label}>
-                {modalite.label}
-              </option>
-            ))}
-          </select>
-        </label>
-      </div>
-      <div className="championnats-table-container">
-        <table className="championnats-table">
-          <thead>
-            <tr>
-              <th>Position</th>
-              <th>Team</th>
-              <th>Points</th>
-              <th>Plateaux</th>
-            </tr>
-          </thead>
-          <tbody>
-            {teams.map((team, index) => (
-              <tr key={team.id}>
-                <td>{index + 1}</td>
-                <td>{team.name}</td>
-                <td>{team.points}</td>
-                <td>{team.plateaux}</td>
+    <div className="flex items-center justify-center min-h-screen bg-gradient-to-br from-blue-600 to-blue-800">
+      <div className="bg-white rounded-lg shadow-lg p-8 max-w-4xl w-full">
+        <h1 className="text-2xl font-bold mb-6 text-gray-900 text-center">
+          Championnat
+        </h1>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+          <label className="text-gray-700">
+            Catégorie d&apos;âge:
+            <select
+              value={selectedCategory}
+              onChange={(e) => setSelectedCategory(e.target.value)}
+              className="mt-1 w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500"
+            >
+              <option value="">Select</option>
+              {categories.map((category) => (
+                <option key={category} value={category}>
+                  {category}
+                </option>
+              ))}
+            </select>
+          </label>
+          <label className="text-gray-700">
+            Genre:
+            <select
+              value={selectedGenre}
+              onChange={(e) => setSelectedGenre(e.target.value)}
+              className="mt-1 w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500"
+            >
+              <option value="">Select</option>
+              {genres.map((genre) => (
+                <option key={genre} value={genre}>
+                  {genre}
+                </option>
+              ))}
+            </select>
+          </label>
+          <label className="text-gray-700">
+            Modalité:
+            <select
+              value={selectedModalite}
+              onChange={(e) => setSelectedModalite(e.target.value)}
+              className="mt-1 w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500"
+            >
+              <option value="">Select</option>
+              {filteredModalites.map((modalite) => (
+                <option key={modalite.label} value={modalite.label}>
+                  {modalite.label}
+                </option>
+              ))}
+            </select>
+          </label>
+        </div>
+        <div className="overflow-x-auto">
+          <table className="w-full border-collapse text-left">
+            <thead>
+              <tr>
+                <th className="px-4 py-2 bg-gray-300 text-gray-900">Position</th>
+                <th className="px-4 py-2 bg-gray-300 text-gray-900">Team</th>
+                <th className="px-4 py-2 bg-gray-300 text-gray-900">Points</th>
+                <th className="px-4 py-2 bg-gray-300 text-gray-900">
+                  Plateaux
+                </th>
               </tr>
-            ))}
-          </tbody>
-        </table>
+            </thead>
+            <tbody>
+              {teams.map((team, index) => (
+                <tr
+                  key={team.id}
+                  className={index % 2 === 0 ? "bg-gray-100" : "bg-white"}
+                >
+                  <td className="px-4 py-2 border-t border-gray-300">
+                    {index + 1}
+                  </td>
+                  <td className="px-4 py-2 border-t border-gray-300">
+                    {team.name}
+                  </td>
+                  <td className="px-4 py-2 border-t border-gray-300">
+                    {team.points}
+                  </td>
+                  <td className="px-4 py-2 border-t border-gray-300">
+                    {team.plateaux}
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
       </div>
     </div>
   );

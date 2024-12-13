@@ -29,64 +29,60 @@ const OrganizePlateauxPage: React.FC = () => {
   };
 
   return (
-    <div className="container mx-auto p-4 bg-gray-100 dark:bg-gray-900 text-gray-900 dark:text-gray-100 rounded-lg shadow-md">
-      <h1 className="title text-center text-2xl font-bold mb-6">
-        Organiser un plateaux
-      </h1>
-      <p className="text-center mb-4 text-gray-700 dark:text-gray-300">
-        Sélectionnez un plateaux sans organisateur pour vous porter candidat.
-      </p>
-      <div className="championnats-table-container">
-        <table className="championnats-table w-full text-left border-collapse">
-          <thead>
-            <tr>
-              <th className="px-4 py-2 bg-gray-300 dark:bg-gray-700 text-gray-900 dark:text-gray-100">
-                Date
-              </th>
-              <th className="px-4 py-2 bg-gray-300 dark:bg-gray-700 text-gray-900 dark:text-gray-100">
-                Lieu
-              </th>
-              <th className="px-4 py-2 bg-gray-300 dark:bg-gray-700 text-gray-900 dark:text-gray-100">
-                Catégorie d&apos;âge
-              </th>
-              <th className="px-4 py-2 bg-gray-300 dark:bg-gray-700 text-gray-900 dark:text-gray-100">
-                Action
-              </th>
-            </tr>
-          </thead>
-          <tbody>
-            {plateaux.map((plateau) => (
-              <tr
-                key={plateau.id}
-                className={`${
-                  plateau.isOrganized ? "bg-gray-200 dark:bg-gray-800" : ""
-                }`}
-              >
-                <td className="px-4 py-2 border-t border-gray-300 dark:border-gray-700">
-                  {plateau.date}
-                </td>
-                <td className="px-4 py-2 border-t border-gray-300 dark:border-gray-700">
-                  {plateau.location}
-                </td>
-                <td className="px-4 py-2 border-t border-gray-300 dark:border-gray-700">
-                  {plateau.ageCategory}
-                </td>
-                <td className="px-4 py-2 border-t border-gray-300 dark:border-gray-700">
-                  {plateau.isOrganized ? (
-                    <span className="text-gray-500">Déjà organisé</span>
-                  ) : (
-                    <button
-                      onClick={() => applyToOrganize(plateau.id)}
-                      className="bg-blue-500 text-white py-1 px-3 rounded-md shadow-md hover:bg-blue-600 transition duration-300"
-                    >
-                      Postuler
-                    </button>
-                  )}
-                </td>
+    <div className="flex items-center justify-center min-h-screen bg-gradient-to-br from-blue-600 to-blue-800">
+      <div className="bg-white rounded-lg shadow-lg p-8 max-w-4xl w-full">
+        <h1 className="text-2xl font-bold mb-6 text-gray-900 text-center">
+          Organiser un plateaux
+        </h1>
+        <p className="text-gray-700 text-center mb-6">
+          Sélectionnez un plateaux sans organisateur pour vous porter candidat.
+        </p>
+        <div className="overflow-x-auto">
+          <table className="w-full border-collapse text-left">
+            <thead>
+              <tr>
+                <th className="px-4 py-2 bg-gray-300 text-gray-900">Date</th>
+                <th className="px-4 py-2 bg-gray-300 text-gray-900">Lieu</th>
+                <th className="px-4 py-2 bg-gray-300 text-gray-900">
+                  Catégorie d&apos;âge
+                </th>
+                <th className="px-4 py-2 bg-gray-300 text-gray-900">Action</th>
               </tr>
-            ))}
-          </tbody>
-        </table>
+            </thead>
+            <tbody>
+              {plateaux.map((plateau) => (
+                <tr
+                  key={plateau.id}
+                  className={`${
+                    plateau.isOrganized ? "bg-gray-200" : "bg-white"
+                  }`}
+                >
+                  <td className="px-4 py-2 border-t border-gray-300">
+                    {plateau.date}
+                  </td>
+                  <td className="px-4 py-2 border-t border-gray-300">
+                    {plateau.location}
+                  </td>
+                  <td className="px-4 py-2 border-t border-gray-300">
+                    {plateau.ageCategory}
+                  </td>
+                  <td className="px-4 py-2 border-t border-gray-300">
+                    {plateau.isOrganized ? (
+                      <span className="text-gray-500">Déjà organisé</span>
+                    ) : (
+                      <button
+                        onClick={() => applyToOrganize(plateau.id)}
+                        className="bg-blue-500 text-white py-1 px-3 rounded-md shadow-md hover:bg-blue-600 transition duration-300"
+                      >
+                        Postuler
+                      </button>
+                    )}
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
       </div>
     </div>
   );

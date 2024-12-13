@@ -70,90 +70,116 @@ const RésultatsPage: React.FC = () => {
   });
 
   return (
-    <div className="container">
-      <h1 className="title">Résultats des Matchs</h1>
-      <div className="controls">
-      <button onClick={() => handleWeekChange(-1)}>Previous Week</button>
-      <select
-        value={selectedWeek}
-        onChange={(e) => {
-        setSelectedWeek(e.target.value);
-        setWeek(Number(e.target.value));
-        }}
-      >
-        <option value="">Choose Week</option>
-        {[...Array(10)].map((_, index) => (
-        <option key={index} value={index}>
-          Week {index}
-        </option>
-        ))}
-      </select>
-      <button onClick={() => handleWeekChange(1)}>Next Week</button>
-      </div>
-      <div className="filters">
-      <label>
-        Catégorie d&apos;âge:
-        <select
-        value={category}
-        onChange={(e) => setCategory(e.target.value)}
-        >
-        <option value="">All</option>
-        {categories.map((cat) => (
-          <option key={cat} value={cat}>
-          {cat}
-          </option>
-        ))}
-        </select>
-      </label>
-      <label>
-        Genre:
-        <select value={genre} onChange={(e) => setGenre(e.target.value)}>
-        <option value="">All</option>
-        {genres.map((gen) => (
-          <option key={gen} value={gen}>
-          {gen}
-          </option>
-        ))}
-        </select>
-      </label>
-      <label>
-        Modalité:
-        <select
-        value={modalite}
-        onChange={(e) => setModalite(e.target.value)}
-        >
-        <option value="">All</option>
-        {filteredModalites.map((mod) => (
-          <option key={mod.label} value={mod.label}>
-          {mod.label}
-          </option>
-        ))}
-        </select>
-      </label>
-      </div>
-      <div className="list">
-      {filteredResults.length > 0 ? (
-        filteredResults.map((result) => (
-        <div className="card" key={result.id}>
-          <h2>{result.match}</h2>
-          <p>
-          <strong>Date:</strong> {result.date}
-          </p>
-          <p>
-          <strong>Time:</strong> {result.time}
-          </p>
-          <p>
-          <strong>Location:</strong> {result.location}
-          </p>
-          <p>
-          <strong>Score:</strong> {result.teamA} {result.score}{" "}
-          {result.teamB}
-          </p>
+    <div className="flex items-center justify-center min-h-screen bg-gradient-to-br from-blue-600 to-blue-800">
+      <div className="bg-white rounded-lg shadow-lg p-8 max-w-lg w-full text-center">
+        <h1 className="text-2xl font-bold mb-4 text-gray-900">
+          Résultats des Matchs
+        </h1>
+        <div className="mb-6">
+          <button
+            onClick={() => handleWeekChange(-1)}
+            className="bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded-md mr-2"
+          >
+            Previous Week
+          </button>
+          <select
+            value={selectedWeek}
+            onChange={(e) => {
+              setSelectedWeek(e.target.value);
+              setWeek(Number(e.target.value));
+            }}
+            className="border border-gray-300 rounded-md py-2 px-3 mx-2 shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+          >
+            <option value="">Choose Week</option>
+            {[...Array(10)].map((_, index) => (
+              <option key={index} value={index}>
+                Week {index}
+              </option>
+            ))}
+          </select>
+          <button
+            onClick={() => handleWeekChange(1)}
+            className="bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded-md ml-2"
+          >
+            Next Week
+          </button>
         </div>
-        ))
-      ) : (
-        <p>No results found for this week or filters.</p>
-      )}
+        <div className="flex flex-col gap-4 mb-6">
+          <label className="text-gray-700">
+            Catégorie d&apos;âge:
+            <select
+              value={category}
+              onChange={(e) => setCategory(e.target.value)}
+              className="mt-1 w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500"
+            >
+              <option value="">All</option>
+              {categories.map((cat) => (
+                <option key={cat} value={cat}>
+                  {cat}
+                </option>
+              ))}
+            </select>
+          </label>
+          <label className="text-gray-700">
+            Genre:
+            <select
+              value={genre}
+              onChange={(e) => setGenre(e.target.value)}
+              className="mt-1 w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500"
+            >
+              <option value="">All</option>
+              {genres.map((gen) => (
+                <option key={gen} value={gen}>
+                  {gen}
+                </option>
+              ))}
+            </select>
+          </label>
+          <label className="text-gray-700">
+            Modalité:
+            <select
+              value={modalite}
+              onChange={(e) => setModalite(e.target.value)}
+              className="mt-1 w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500"
+            >
+              <option value="">All</option>
+              {filteredModalites.map((mod) => (
+                <option key={mod.label} value={mod.label}>
+                  {mod.label}
+                </option>
+              ))}
+            </select>
+          </label>
+        </div>
+        <div className="flex flex-col gap-4">
+          {filteredResults.length > 0 ? (
+            filteredResults.map((result) => (
+              <div
+                key={result.id}
+                className="bg-gray-100 p-4 rounded-lg shadow-md text-left"
+              >
+                <h2 className="text-lg font-bold text-gray-800">
+                  {result.match}
+                </h2>
+                <p className="text-gray-700">
+                  <strong>Date:</strong> {result.date}
+                </p>
+                <p className="text-gray-700">
+                  <strong>Time:</strong> {result.time}
+                </p>
+                <p className="text-gray-700">
+                  <strong>Location:</strong> {result.location}
+                </p>
+                <p className="text-gray-700">
+                  <strong>Score:</strong> {result.teamA} {result.score}{" "}
+                  {result.teamB}
+                </p>
+              </div>
+            ))
+          ) : (
+            <p className="text-gray-700">No results found for this week or filters.</p>
+          )}
+        </div>
       </div>
     </div>
   );
