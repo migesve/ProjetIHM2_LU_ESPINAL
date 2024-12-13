@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import styles from "./Navbar.module.css";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 
 export default function Navbar() {
   interface User {
@@ -13,22 +13,22 @@ export default function Navbar() {
   const [role, setRole] = useState<string | null>(null);
   const [hoveredDropdown, setHoveredDropdown] = useState<string | null>(null);
 
-  useEffect(() => {
-    setUser({ username: "Pierre" });
-  }, []);
-
-  useEffect(() => {
-    if (user) {
-      setRole("responsable comite");
-    }
-  }, [user]);
-
   const handleMouseEnter = (dropdownName: string) => {
     setHoveredDropdown(dropdownName);
   };
 
   const handleMouseLeave = () => {
     setHoveredDropdown(null);
+  };
+
+  const setUserRole = (role: string) => {
+    setUser({ username: role === "coach" ? "Coach User" : "RC User" });
+    setRole(role);
+  };
+
+  const logOut = () => {
+    setUser(null);
+    setRole(null);
   };
 
   return (
@@ -73,7 +73,9 @@ export default function Navbar() {
                 <span>Gérer championnats</span>
                 <ul
                   className={`${styles.subMenu} ${
-                    hoveredDropdown === "gerer-championnats" ? styles.subMenuVisible : ""
+                    hoveredDropdown === "gerer-championnats"
+                      ? styles.subMenuVisible
+                      : ""
                   }`}
                 >
                   <li className={styles.navItem}>
@@ -95,9 +97,27 @@ export default function Navbar() {
       </div>
       <div className={styles.navRight}>
         {user ? (
-          <span className={styles.userGreeting}>Bonjour, {user.username}</span>
+          <>
+            <span className={styles.userGreeting}>Bonjour, {user.username}</span>
+            <button className={styles.navButton} onClick={logOut}>
+              Log Out
+            </button>
+          </>
         ) : (
-          <Link href="/pages/signup">Inscription / Connexion</Link>
+          <>
+            <button
+              className={styles.navButton}
+              onClick={() => setUserRole("coach")}
+            >
+              Coach
+            </button>
+            <button
+              className={styles.navButton}
+              onClick={() => setUserRole("responsable comite")}
+            >
+              RC
+            </button>
+          </>
         )}
       </div>
     </nav>
