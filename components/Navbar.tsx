@@ -36,41 +36,51 @@ export default function Navbar() {
       <div className={styles.navLeft}>
         <ul className={styles.navList}>
           <li className={styles.navItem}>
-            <Link href="/">Accueil</Link>
+            <Link href="/" className={styles.navLink}>
+              Accueil
+            </Link>
           </li>
           <li
             className={`${styles.navItem} ${styles.dropdown}`}
             onMouseEnter={() => handleMouseEnter("championnats")}
             onMouseLeave={handleMouseLeave}
           >
-            <span>Championnats</span>
+            <span className={styles.navLink}>Championnats</span>
             <ul
               className={`${styles.subMenu} ${
                 hoveredDropdown === "championnats" ? styles.subMenuVisible : ""
               }`}
             >
               <li className={styles.navItem}>
-                <Link href="/pages/calendrier">Calendrier</Link>
+                <Link href="/pages/calendrier" className={styles.navLink}>
+                  Calendrier
+                </Link>
               </li>
               <li className={styles.navItem}>
-                <Link href="/pages/resultats">Résultats</Link>
+                <Link href="/pages/resultats" className={styles.navLink}>
+                  Résultats
+                </Link>
               </li>
               <li className={styles.navItem}>
-                <Link href="/pages/classement">Classement</Link>
+                <Link href="/pages/classement" className={styles.navLink}>
+                  Classement
+                </Link>
               </li>
             </ul>
           </li>
           {role === "responsable comite" && (
             <>
               <li className={styles.navItem}>
-                <Link href="/pages/organiser">Organiser un Plateaux</Link>
+                <Link href="/pages/organiser" className={styles.navLink}>
+                  Organiser un Plateaux
+                </Link>
               </li>
               <li
                 className={`${styles.navItem} ${styles.dropdown}`}
                 onMouseEnter={() => handleMouseEnter("gerer-championnats")}
                 onMouseLeave={handleMouseLeave}
               >
-                <span>Gérer championnats</span>
+                <span className={styles.navLink}>Gérer championnats</span>
                 <ul
                   className={`${styles.subMenu} ${
                     hoveredDropdown === "gerer-championnats"
@@ -79,10 +89,14 @@ export default function Navbar() {
                   }`}
                 >
                   <li className={styles.navItem}>
-                    <Link href="/pages/championnats">Créer Championnat</Link>
+                    <Link href="/pages/championnats" className={styles.navLink}>
+                      Créer Championnat
+                    </Link>
                   </li>
                   <li className={styles.navItem}>
-                    <Link href="/pages/cloture">Clôture des Championnats</Link>
+                    <Link href="/pages/cloture" className={styles.navLink}>
+                      Clôture des Championnats
+                    </Link>
                   </li>
                 </ul>
               </li>
@@ -90,7 +104,9 @@ export default function Navbar() {
           )}
           {role === "coach" && (
             <li className={styles.navItem}>
-              <Link href="/pages/organiser">Organiser un Plateaux</Link>
+              <Link href="/pages/organiser" className={styles.navLink}>
+                Organiser un Plateaux
+              </Link>
             </li>
           )}
         </ul>
