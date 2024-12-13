@@ -51,7 +51,7 @@ const CalendrierPage: React.FC = () => {
   });
 
   return (
-    <div className="flex items-center justify-center min-h-screen bg-gradient-to-br from-blue-600 to-blue-800">
+    <div className="flex items-center justify-center min-h-screen bg-gradient-to-br from-green-600 to-blue-800">
       <div className="bg-white rounded-lg shadow-lg p-8 max-w-lg w-full text-center">
         <h1 className="text-2xl font-bold mb-4 text-gray-900">
           Calendrier des Matchs et Tournois
